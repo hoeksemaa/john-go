@@ -39,8 +39,6 @@ function App() {
 
 function getInitialGame() {
   let initialGameState = createGame()
-  initialGameState = makeMove(initialGameState, 3)
-  initialGameState = makeMove(initialGameState, 0)
   return initialGameState
 }
 
