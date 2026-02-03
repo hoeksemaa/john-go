@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createGame, makeMove, type GameState } from "./go";
 
 function App() {
@@ -32,6 +32,7 @@ function App() {
         </tbody>
       </table>
       <p>current player: {gameState.currentPlayer}</p>
+      <p>winner: {gameState.winner}</p>
     </div>
   )
 }
