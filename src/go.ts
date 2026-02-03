@@ -2,6 +2,8 @@ export type Player = "X" | "O";
 
 export type Cell = Player | null;
 
+export type Winner = Player | string | null;
+
 // Board is a 3x3 grid, represented as a 9-element array.
 // Indices map to positions:
 //  0 | 1 | 2
@@ -14,7 +16,7 @@ export type Board = [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell];
 export type GameState = {
   board: Board;
   currentPlayer: Player;
-  winner: Cell;
+  winner: Winner;
 };
 
 export function createGame(): GameState {
@@ -63,6 +65,10 @@ export function makeMove(state: GameState, position: number): GameState {
 
   // check for victory (success condition)
   nextState.winner = getWinner(nextState)
+  
+  if (!nextState.winner && boardIsFull(nextState)){
+    nextState.winner = "tie"
+  }
 
   return nextState
 }
@@ -94,4 +100,19 @@ export function getWinner(state: GameState): Player | null {
   
   // no winners
   return null;
+}
+
+export function boardIsFull(state: GameState): boolean {
+  let nullCount = 0
+  for (let i = 0; i < 9; i++){
+    if (!state.board[i]){
+      nullCount++
+    }
+  }
+
+  if (nullCount == 0){
+    return true
+  } else {
+    return false
+  }
 }
