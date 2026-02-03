@@ -14,12 +14,14 @@ export type Board = [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell];
 export type GameState = {
   board: Board;
   currentPlayer: Player;
+  winner: Cell;
 };
 
 export function createGame(): GameState {
   return {
     board: [null, null, null, null, null, null, null, null, null],
     currentPlayer: "X",
+    winner: null
   };
 }
 
@@ -40,7 +42,7 @@ export function makeMove(state: GameState, position: number): GameState {
   if (state.board[position] != null)
     throw new Error("Position is already occupied")
 
-  // CHECK FOR VICTORY
+  // CHECK FOR VICTORY (ERROR CONDITION)
   if (getWinner(state)){
     throw new Error("Game is already over")
   }
@@ -58,6 +60,9 @@ export function makeMove(state: GameState, position: number): GameState {
   } else {
     nextState.currentPlayer = "X"
   }
+
+  // check for victory (success condition)
+  nextState.winner = getWinner(nextState)
 
   return nextState
 }
@@ -79,12 +84,12 @@ export function getWinner(state: GameState): Player | null {
 
   // check positive slope diagonal
   if ((state.board[0] == state.board[4]) && (state.board[0] == state.board[8]) && state.board[4]){
-      return state.board[4]
+    return state.board[4]
   }
 
   // check negative slope diagonal
   if ((state.board[2] == state.board[4]) && (state.board[2] == state.board[6]) && state.board[4]){
-      return state.board[4]
+    return state.board[4]
   }
   
   // no winners
