@@ -15,7 +15,6 @@ export type Board = [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell];
 
 export type GameState = {
   board: Board;
-  boardSize: 3;
   currentPlayer: Player;
   winner: Winner;
 };
