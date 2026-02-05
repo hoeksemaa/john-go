@@ -25,17 +25,17 @@ function App() {
       })
   }
 
-  /* 
   function handleReset() {
-    axios
-      .post("http://localhost:3000/reset", positionMessage)
-      .then(response => {
-        console.log("clicked!")
-        console.log(response)
-        setGameState(response.data)
+    fetch("http://localhost:3000/reset", {
+      method: "POST"
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("reset!")
+        console.log(data)
+        setGameState(data)
       })
   }
-  */
 
   useEffect(() => {
     fetch("http://localhost:3000/game")
