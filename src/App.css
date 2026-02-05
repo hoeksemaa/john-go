@@ -21,10 +21,15 @@ p {
     background-color: #ADD8E6;
 }
 
+button {
+    display: flex;
+    justify-content: center;
+}
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 60px);
-    grid-template-rows: repeat(3, 60px);
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
     gap: 3px;
     padding: 3px;
     background-color: #141414;
@@ -38,4 +43,9 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.buttonDiv {
+    display: flex;
+    justify-content: center;
 }
