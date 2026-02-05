@@ -1,8 +1,10 @@
-export type Player = "X" | "O";
+import { v4 as uuid } from 'uuid'
 
-export type Cell = Player | null;
+export type Player = "X" | "O"
 
-export type Winner = Player | string | null;
+export type Cell = Player | null
+
+export type Winner = Player | string | null
 
 // Board is a 3x3 grid, represented as a 9-element array.
 // Indices map to positions:
@@ -11,20 +13,22 @@ export type Winner = Player | string | null;
 //  3 | 4 | 5
 //  ---------
 //  6 | 7 | 8
-export type Board = [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell];
+export type Board = [Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell, Cell]
 
 export type GameState = {
-  board: Board;
-  currentPlayer: Player;
-  winner: Winner;
-};
+  board: Board
+  currentPlayer: Player
+  winner: Winner
+  id: string
+}
 
 export function createGame(): GameState {
   return {
     board: [null, null, null, null, null, null, null, null, null],
     currentPlayer: "X",
-    winner: null
-  };
+    winner: null,
+    id: uuid()
+  }
 }
 
 export function makeMove(state: GameState, position: number): GameState {
@@ -99,7 +103,7 @@ export function getWinner(state: GameState): Player | null {
   }
   
   // no winners
-  return null;
+  return null
 }
 
 export function boardIsFull(state: GameState): boolean {
