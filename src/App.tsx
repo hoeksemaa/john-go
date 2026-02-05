@@ -1,4 +1,4 @@
-import axios from "axios"
+//import axios from "axios"
 import { useState, useEffect } from "react"
 import { createGame, makeMove, type GameState } from "./go"
 import './App.css'
@@ -12,19 +12,20 @@ function App() {
   let [loading, setLoading] = useState(true)
 
   function handleClick(position: number) {
-    let positionMessage = {
-      positionMessage: position
-    }
-    axios
-      .post("http://localhost:3000/move", positionMessage)
-      .then(response => {
+    fetch("http://localhost:3000/move", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({positionMessage: position})
+    })
+      .then(response => response.json())
+      .then(data => {
         console.log("clicked!")
-        console.log(response)
-        setGameState(response.data)
+        console.log(data)
+        setGameState(data)
       })
   }
 
-  /*
+  /* 
   function handleReset() {
     axios
       .post("http://localhost:3000/reset", positionMessage)
@@ -37,10 +38,10 @@ function App() {
   */
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/game")
-      .then(response => {
-        setGameState(response.data)
+    fetch("http://localhost:3000/game")
+      .then(response => response.json())
+      .then(data => {
+        setGameState(data)
         setLoading(false)
       })
   }, [])
@@ -68,7 +69,7 @@ function App() {
         <p>current player: {gameState.currentPlayer}</p>
         <p>winner: {gameState.winner}</p>
         <div className="buttonDiv">
-          <button onClick={() => handleReset()}>bingo</button>
+          <button onClick={() => handleReset()}>reset</button>
         </div>
       </div>
     )
