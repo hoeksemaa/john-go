@@ -1,8 +1,8 @@
 body {
-    color: red;
+    color: black;
     display: flex;
     justify-content: center;
-    background: #ADD8E6;
+    background: lightgray;
 }
 
 h1 {
@@ -18,7 +18,7 @@ table {
 p {
     display: flex;
     justify-content: center;
-    background-color: #ADD8E6;
+    background-color: lightgray;
 }
 
 button {
@@ -39,7 +39,7 @@ button {
 .cell {
     width: 100%;
     height: 100%;
-    background-color: beige;;
+    background-color: rgb(212, 246, 212);
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,4 +1,5 @@
 import express from "express"
+import expressWs from 'express-ws'
 import type { Request, Response } from "express"
 import ViteExpress from "vite-express"
 import { createGame, makeMove, type GameState } from "./go.ts"
@@ -8,6 +9,7 @@ const PORT = 3000
 
 export let games: Games = new Map()
 export const app = express()
+expressWs(app)
 
 app.use(express.json())
 
