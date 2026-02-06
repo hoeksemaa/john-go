@@ -12,27 +12,19 @@ export const app = express()
 app.use(express.json())
 
 app.get("/list", (_, res: Response) => {
-    // convert Map into object
     const gamesList = Array.from(games.values())
-    console.log('GAMES LIST: ', gamesList)
     res.json(gamesList)
 })
 
 app.get("/game/:id", (req: Request, res: Response) => {
-    // extract id
     const uuid = req.params.id as string
-    
-    // get game
     const game = games.get(uuid)
-
-    // return game with given id
     res.json(game)
 })
 
 app.post("/create", (_, res: Response) => {
     const game = createGame() 
     games.set(game.id, game)
-    //console.log(game)
     res.json(game)
 })
 

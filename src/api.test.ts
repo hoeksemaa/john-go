@@ -134,4 +134,30 @@ describe('Tic Tac Toe API', () => {
             expect(typeof response2.body.winner).toBe('object')
         })
     })
+
+    describe('integration test', () => {
+        it('should play a game where X wins on top row', async() => {
+            const game = await request(app)
+                .post("/create")
+                .expect(200)
+
+            const id = game.body.id
+
+            const move1 = await request(app)
+                .post("/move/" + id).send({ position: 0 }).expect(200)
+            const move2 = await request(app)
+                .post("/move/" + id).send({ position: 3 }).expect(200)
+            const move3 = await request(app)
+                .post("/move/" + id).send({ position: 1 }).expect(200)
+            const move4 = await request(app)
+                .post("/move/" + id).send({ position: 4 }).expect(200)
+            const move5 = await request(app)
+                .post("/move/" + id).send({ position: 2 }).expect(200)
+
+            expect(move5.body.id).toBe(id)
+            expect(move5.body.board).toEqual(["X", "X", "X", "O", "O", null, null, null, null])
+            expect(move5.body.currentPlayer).toBe("O")
+            expect(move5.body.winner).toBe("X")
+        })
+    })
 })

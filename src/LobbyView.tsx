@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { type GameID, type Games } from './types'
+import { type GameID } from './types'
 import type { GameState } from "./go"
 
 type LobbyViewProps = {
@@ -16,7 +16,6 @@ function LobbyView({ onGameEnter } : LobbyViewProps) {
             method: "POST"
         })
         const data = await response.json()
-        //console.log(data)
         onGameEnter(data.id)
     }
 
@@ -25,32 +24,9 @@ function LobbyView({ onGameEnter } : LobbyViewProps) {
     }
 
     async function loadGamesList() {
-        // get games data as list
         const response = await fetch("http://localhost:3000/list")
         const data = await response.json()
-        
-        //console.log('ORIGINAL GAMES: ', gamesList)
-
-        console.log('LOADING...')
-        console.log(data)
-        console.log('typeof data: ', typeof data)
-        console.log('loaded!')
-
-        // create new map from data
-        //const convertedData = Object.entries(data)
-        //console.log('convertedData: ', convertedData)
-        //const newGamesMap = new Map<string, GameState>(convertedData)
-        
-
-        //const gameStates = data.values()
-        //console.log('gameStates: ', gameStates)
-        //for (const g in gameStates) {
-        //    games.set(g.id, g)
-        //}
-        
-        //
         setGamesList(data)
-        console.log('gamesList: ', gamesList)
     }
     
     useEffect(() => {
