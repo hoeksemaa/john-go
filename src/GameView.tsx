@@ -1,29 +1,28 @@
 import { useEffect, useState } from 'react'
 import { createGame, type GameState } from "./go"
-import { type GameID, type Games } from './types'
+import { type GameID } from './types'
 
 type GameViewProps = {
-    gameID: string,
+    gameID: GameID,
     onLobbyEnter: () => void
 }
 
 function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     const [gameState, setGameState] = useState(createGame())
 
-    async function handleMove(index: number, id: string) {
+    async function handleMove(index: number, id: GameID) {
         const response = await fetch("http://localhost:3000/move/" + id, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({position: index})
         })
-        const data = await response.json()
-        console.log(data)
+        const data: GameState = await response.json()
         setGameState(data)
     }
 
-    async function getGameState(id: string) {
+    async function getGameState(id: GameID) {
         const response = await fetch("http://localhost:3000/game/" + id)
-        const data = await response.json()
+        const data: GameState = await response.json()
         setGameState(data)
     }
 
