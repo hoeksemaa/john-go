@@ -89,5 +89,49 @@ describe('Tic Tac Toe API', () => {
             expect(response.body.currentPlayer).toBe("O")
             expect(response.body.winner).toBe(null)
         })
+
+        it('should update a game twice based on two moves', async() => {
+            const game1 = await request(app)
+                .post("/create")
+                .expect(200)
+            const uuid = game1.body.id
+
+            const response1 = await request(app)
+                .post("/move/" + uuid)
+                .send({ position: 0 })
+                .expect(200)
+
+            const response2 = await request(app)
+                .post("/move/" + uuid)
+                .send({ position: 1 })
+                .expect(200)
+            
+            expect(response2.body.id).toBe(uuid)
+            expect(response2.body.board).toEqual(["X", "O", null, null, null, null, null, null, null])
+            expect(response2.body.currentPlayer).toBe("X")
+            expect(response2.body.winner).toBe(null)
+        })
+
+        it('should update a game twice based on two moves', async() => {
+            const game1 = await request(app)
+                .post("/create")
+                .expect(200)
+            const uuid = game1.body.id
+
+            const response1 = await request(app)
+                .post("/move/" + uuid)
+                .send({ position: 0 })
+                .expect(200)
+
+            const response2 = await request(app)
+                .post("/move/" + uuid)
+                .send({ position: 1 })
+                .expect(200)
+            
+            expect(typeof response2.body.id).toBe('string')
+            expect(typeof response2.body.board).toBe('object')
+            expect(typeof response2.body.currentPlayer).toBe('string')
+            expect(typeof response2.body.winner).toBe('object')
+        })
     })
 })
