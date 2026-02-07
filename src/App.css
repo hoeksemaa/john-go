@@ -5,10 +5,10 @@
 }
 
 body {
-    color: black;
+    color: #f000ff;
     display: flex;
     justify-content: center;
-    background: lightgray;
+    background: #301934;
     font-family: "Press Start 2P", system-ui;
     justify-content: center;
 }
@@ -17,8 +17,9 @@ button {
     font-family: "Press Start 2P", system-ui;
     padding: 10px;
     margin: 10px;
-    background: lightcoral;
+    background: #f000ff;
     border-radius: 10px;
+    color: #301934
 }
 
 h1 {
@@ -34,12 +35,13 @@ table {
 p {
     display: flex;
     justify-content: center;
-    background-color: lightgray;
+    background-color: rgb(24, 12, 26);
 }
 
 button {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .grid {
@@ -51,13 +53,16 @@ button {
     background-color: #141414;
     place-items: center;
     width: fit-content;
-    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
 }
 
 .cell {
     width: 100%;
     height: 100%;
-    background-color: lightcoral;
+    background-color: #301934;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,4 +77,23 @@ button {
     margin-top: 200px;
     display: flex;
     justify-content: center;
+}
+
+.gameControls {
+    display: flex;
+    justify-content: center;
+}
+
+.info {
+    margin-left: 30px
+}
+
+.info p {
+    justify-content: flex-start;
+}
+
+.headBar {
+    background: rgb(24, 12, 26);
+    padding: 10px;
+    border-radius: 10px;
 }

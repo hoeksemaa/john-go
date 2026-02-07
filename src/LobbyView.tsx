@@ -2,10 +2,7 @@ import { useState, useEffect } from "react"
 import { type GameID } from './types'
 import type { GameState } from "./go"
 
-//const port = parseInt(process.env.PORT as string) || 3000
-//const port = process.env.PORT || 3000
-//const port = 3000
-//const port = 11000
+const COLOR_CHANGE_INTERVAL = 1000 // milliseconds
 
 type LobbyViewProps = {
     onGameEnter: (id: GameID) => void
@@ -15,6 +12,16 @@ type GamesList = GameState[]
 
 function LobbyView({ onGameEnter } : LobbyViewProps) {
     const [gamesList, setGamesList] = useState<GamesList>([])
+    const [gameButtonColor, setGameButtonColor] = useState('#f000ff')
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF'
+        let color = '#'
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)]
+        }
+        return color
+    }
 
     async function handleCreateGame() {
         const response = await fetch(`/create`, {
@@ -41,13 +48,24 @@ function LobbyView({ onGameEnter } : LobbyViewProps) {
         return () => {clearInterval(interval)}
     }, [])
 
+    useEffect(() => {
+        const colorInterval = setInterval(() => {
+            setGameButtonColor(getRandomColor())
+        }, COLOR_CHANGE_INTERVAL)
+        return () => clearInterval(colorInterval)
+    }, [])
+
     return (
         <div>
             <h1>Lobby</h1>
             {gamesList.map((game) => {
                 return (
-                    <div className="buttonDiv">
-                        <button onClick={() => handleEnterGame(game.id)}>
+                    <div className="buttonDiv" key={game.id}>
+                        <button
+                            className="gameButton"
+                            onClick={() => handleEnterGame(game.id)}
+                            style={{ backgroundColor: gameButtonColor }}
+                        >
                             game {game.id.slice(0, 3)}
                         </button>
                     </div>
