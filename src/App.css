@@ -5,10 +5,10 @@
 }
 
 body {
-    color: black;
+    color: #f000ff;
     display: flex;
     justify-content: center;
-    background: lightgray;
+    background: #301934;
     font-family: "Press Start 2P", system-ui;
     justify-content: center;
 }
@@ -17,8 +17,9 @@ button {
     font-family: "Press Start 2P", system-ui;
     padding: 10px;
     margin: 10px;
-    background: lightcoral;
+    background: #f000ff;
     border-radius: 10px;
+    color: #301934
 }
 
 h1 {
@@ -34,7 +35,7 @@ table {
 p {
     display: flex;
     justify-content: center;
-    background-color: grey;
+    background-color: rgb(24, 12, 26);
 }
 
 button {
@@ -61,7 +62,7 @@ button {
 .cell {
     width: 100%;
     height: 100%;
-    background-color: lightgray;
+    background-color: #301934;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -88,7 +89,7 @@ button {
 }
 
 .headBar {
-    background: grey;
+    background: rgb(24, 12, 26);
     padding: 10px;
     border-radius: 10px;
 }

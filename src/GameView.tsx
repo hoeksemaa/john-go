@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { createGame, type GameState } from "./go"
 import { type GameID } from './types'
 
-const BOUNCE_SPEED = 2 // pixels per frame
+const BOUNCE_SPEED = 3 // pixels per frame
 
 type GameViewProps = {
     gameID: GameID,
@@ -12,10 +12,20 @@ type GameViewProps = {
 function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     const [gameState, setGameState] = useState(createGame())
     const [position, setPosition] = useState({ x: 0, y: 0 })
+    const [gridColor, setGridColor] = useState('#141414')
     const gridRef = useRef<HTMLDivElement>(null)
     const headBarRef = useRef<HTMLDivElement>(null)
     const posRef = useRef({ x: 0, y: 0 })
     const velRef = useRef({ dx: BOUNCE_SPEED, dy: BOUNCE_SPEED })
+
+    function getRandomColor() {
+        const letters = '0123456789ABCDEF'
+        let color = '#'
+        for (let i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)]
+        }
+        return color
+    }
 
     async function handleMove(index: number, id: GameID) {
         const response = await fetch(`/move/${id}`, {
@@ -38,7 +48,9 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     }
 
     function handleBounce() {
-        console.log('Bounce!') // Placeholder for future color change logic
+        const newColor = getRandomColor()
+        setGridColor(newColor)
+        console.log('Bounce! New color:', newColor)
     }
 
     useEffect(() => {
@@ -165,17 +177,18 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
                 className="grid"
                 ref={gridRef}
                 style={{
-                    transform: `translate(${position.x}px, ${position.y}px)`
+                    transform: `translate(${position.x}px, ${position.y}px)`,
+                    backgroundColor: gridColor
                 }}
             >
-                <p className="cell" onClick={() => handleMove(0, gameID)}>{gameState.board[0]}</p>
-                <p className="cell" onClick={() => handleMove(1, gameID)}>{gameState.board[1]}</p>
-                <p className="cell" onClick={() => handleMove(2, gameID)}>{gameState.board[2]}</p>
-                <p className="cell" onClick={() => handleMove(3, gameID)}>{gameState.board[3]}</p>
-                <p className="cell" onClick={() => handleMove(4, gameID)}>{gameState.board[4]}</p>
-                <p className="cell" onClick={() => handleMove(5, gameID)}>{gameState.board[5]}</p>
-                <p className="cell" onClick={() => handleMove(6, gameID)}>{gameState.board[6]}</p>
-                <p className="cell" onClick={() => handleMove(7, gameID)}>{gameState.board[7]}</p>
+                <p className="cell" onClick={() => handleMove(0, gameID)} style={{ color: gridColor }}>{gameState.board[0]}</p>
+                <p className="cell" onClick={() => handleMove(1, gameID)} style={{ color: gridColor }}>{gameState.board[1]}</p>
+                <p className="cell" onClick={() => handleMove(2, gameID)} style={{ color: gridColor }}>{gameState.board[2]}</p>
+                <p className="cell" onClick={() => handleMove(3, gameID)} style={{ color: gridColor }}>{gameState.board[3]}</p>
+                <p className="cell" onClick={() => handleMove(4, gameID)} style={{ color: gridColor }}>{gameState.board[4]}</p>
+                <p className="cell" onClick={() => handleMove(5, gameID)} style={{ color: gridColor }}>{gameState.board[5]}</p>
+                <p className="cell" onClick={() => handleMove(6, gameID)} style={{ color: gridColor }}>{gameState.board[6]}</p>
+                <p className="cell" onClick={() => handleMove(7, gameID)} style={{ color: gridColor }}>{gameState.board[7]}</p>
                 <p className="cell" onClick={() => handleMove(8, gameID)}>{gameState.board[8]}</p>
             </div>
             
