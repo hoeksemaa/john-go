@@ -42,17 +42,21 @@ function LobbyView({ onGameEnter } : LobbyViewProps) {
     }, [])
 
     return (
-        <>
+        <div>
             <h1>Lobby</h1>
             {gamesList.map((game) => {
                 return (
-                    <button onClick={() => handleEnterGame(game.id)}>
-                        {game.id}
-                    </button>
+                    <div className="buttonDiv">
+                        <button onClick={() => handleEnterGame(game.id)}>
+                            game {game.id.slice(0, 3)}
+                        </button>
+                    </div>
                 )
             })}
-            <button onClick={handleCreateGame}>Create Game</button>
-        </>
+            <div className="buttonDiv">
+                <button onClick={handleCreateGame}>Create Game</button>
+            </div>
+        </div>
     )
 }
 
