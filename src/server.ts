@@ -5,7 +5,7 @@ import ViteExpress from "vite-express"
 import { createGame, makeMove, type GameState } from "./go.ts"
 import { type Games } from './types.ts'
 
-const PORT = 3000
+const port = process.env.PORT || 3000
 
 export let games: Games = new Map()
 export const app = express()
@@ -48,4 +48,4 @@ app.post("/move/:id", (req: Request, res: Response) => {
     res.json(game)
 })
 
-ViteExpress.listen(app, PORT, () => console.log(`Server is listening on port ${PORT}...`));
+ViteExpress.listen(app, port, () => console.log(`Server is listening on port ${port}...`));

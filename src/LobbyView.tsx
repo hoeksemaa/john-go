@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import { type GameID } from './types'
 import type { GameState } from "./go"
 
+const port = process.env.PORT || 3000
+
 type LobbyViewProps = {
     onGameEnter: (id: GameID) => void
 }
@@ -12,7 +14,7 @@ function LobbyView({ onGameEnter } : LobbyViewProps) {
     const [gamesList, setGamesList] = useState<GamesList>([])
 
     async function handleCreateGame() {
-        const response = await fetch("http://localhost:3000/create", {
+        const response = await fetch(`http://localhost:${port}/create`, {
             method: "POST"
         })
         const data = await response.json()
@@ -24,7 +26,7 @@ function LobbyView({ onGameEnter } : LobbyViewProps) {
     }
 
     async function loadGamesList() {
-        const response = await fetch("http://localhost:3000/list")
+        const response = await fetch(`http://localhost:${port}/list`)
         const data = await response.json()
         setGamesList(data)
     }
