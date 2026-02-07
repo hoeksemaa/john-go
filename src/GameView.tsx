@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { createGame, type GameState } from "./go"
 import { type GameID } from './types'
 
+const port = process.env.PORT || 3000
+
 type GameViewProps = {
     gameID: GameID,
     onLobbyEnter: () => void
@@ -11,7 +13,7 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     const [gameState, setGameState] = useState(createGame())
 
     async function handleMove(index: number, id: GameID) {
-        const response = await fetch(`http://localhost:3000/move/${id}`, {
+        const response = await fetch(`http://localhost:${port}/move/${id}`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({position: index})
@@ -21,7 +23,7 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     }
 
     async function getGameState(id: GameID) {
-        const response = await fetch(`http://localhost:3000/game/${id}`)
+        const response = await fetch(`http://localhost:${port}/game/${id}`)
         const data: GameState = await response.json()
         setGameState(data)
     }
