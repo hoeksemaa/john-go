@@ -13,14 +13,17 @@ describe('Tic Tac Toe API', () => {
             const game1 = await request(app)
                 .post("/create")
                 .expect(200)
+            expect(game1.body.id).toBe('string')
 
             const game2 = await request(app)
                 .post("/create")
                 .expect(200)
+            expect(game2.body.id).toBe('string')
 
             const response = await request(app)
                 .get("/list")
                 .expect(200)
+            
             expect(response.body.length).toBe(2)
             expect(response.body[0].id).not.toBe(response.body[1].id)
         })
@@ -29,6 +32,7 @@ describe('Tic Tac Toe API', () => {
             const game1 = await request(app)
                 .post("/create")
                 .expect(200)
+            expect(game1.body.id).toBe('string')
 
             const response = await request(app)
                 .get("/list")
@@ -100,6 +104,7 @@ describe('Tic Tac Toe API', () => {
                 .post("/move/" + uuid)
                 .send({ position: 0 })
                 .expect(200)
+            expect(response1.body.id).toBe('string')
 
             const response2 = await request(app)
                 .post("/move/" + uuid)
@@ -122,6 +127,7 @@ describe('Tic Tac Toe API', () => {
                 .post("/move/" + uuid)
                 .send({ position: 0 })
                 .expect(200)
+            expect(response1.body.id).toBe('string')
 
             const response2 = await request(app)
                 .post("/move/" + uuid)
@@ -145,12 +151,16 @@ describe('Tic Tac Toe API', () => {
 
             const move1 = await request(app)
                 .post("/move/" + id).send({ position: 0 }).expect(200)
+                expect(move1.body.id).toBe('string')
             const move2 = await request(app)
                 .post("/move/" + id).send({ position: 3 }).expect(200)
+                expect(move2.body.id).toBe('string')
             const move3 = await request(app)
                 .post("/move/" + id).send({ position: 1 }).expect(200)
+                expect(move3.body.id).toBe('string')
             const move4 = await request(app)
                 .post("/move/" + id).send({ position: 4 }).expect(200)
+                expect(move4.body.id).toBe('string')
             const move5 = await request(app)
                 .post("/move/" + id).send({ position: 2 }).expect(200)
 
