@@ -159,17 +159,19 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
 
     return (
         <>
-            <div className="headBar" ref={headBarRef}>
-                <h1>
-                    Game {gameState.id.slice(0, 3)}
-                </h1>
-                <div className="gameControls">
-                    <div className="info">
-                        <p>current player: {gameState.currentPlayer}</p>
-                        <p>winner: {gameState.winner ? gameState.winner : "none"}</p>
-                    </div>
-                    <div className='buttonDiv'>
-                        <button onClick={handleBackToLobby}>Back to Lobby</button>
+            <div className="headBarWrapper" ref={headBarRef}>
+                <div className="headBar">
+                    <h1>
+                        Game {gameState.id.slice(0, 3)}
+                    </h1>
+                    <div className="gameControls">
+                        <div className="info">
+                            <p>current player: {gameState.currentPlayer}</p>
+                            <p>winner: {gameState.winner ? gameState.winner : "none"}</p>
+                        </div>
+                        <div className='buttonDiv'>
+                            <button onClick={handleBackToLobby}>Back to Lobby</button>
+                        </div>
                     </div>
                 </div>
             </div>
