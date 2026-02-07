@@ -30,7 +30,10 @@ function LobbyView({ onGameEnter } : LobbyViewProps) {
     }
     
     useEffect(() => {
-        loadGamesList()
+        const interval = setInterval(() => {
+            loadGamesList()
+        }, 1000)
+        return () => {clearInterval(interval)}
     }, [])
 
     return (
