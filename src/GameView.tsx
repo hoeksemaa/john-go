@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { createGame, type GameState } from "./go"
 import { type GameID } from './types'
 
-const BOUNCE_SPEED = 3 // pixels per frame
+const BOUNCE_SPEED = 6 // pixels per frame
 
 type GameViewProps = {
     gameID: GameID,
