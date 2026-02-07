@@ -4,7 +4,7 @@ import { type GameID } from './types'
 
 //const port = parseInt(process.env.PORT as string) || 3000
 //const port = process.env.PORT || 3000
-const port = 3000
+//const port = 3000
 //const port = 11000
 
 type GameViewProps = {
@@ -16,7 +16,7 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     const [gameState, setGameState] = useState(createGame())
 
     async function handleMove(index: number, id: GameID) {
-        const response = await fetch(`http://localhost:${port}/move/${id}`, {
+        const response = await fetch(`/move/${id}`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({position: index})
@@ -26,7 +26,7 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     }
 
     async function getGameState(id: GameID) {
-        const response = await fetch(`http://localhost:${port}/game/${id}`)
+        const response = await fetch(`/game/${id}`)
         const data: GameState = await response.json()
         setGameState(data)
     }
@@ -38,7 +38,7 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     useEffect(() => {
         const interval = setInterval(() => {
             getGameState(gameID)
-        }, 1000)
+        }, 500)
 
         return () => {clearInterval(interval)}
     }, [])
