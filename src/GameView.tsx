@@ -161,7 +161,7 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
         <>
             <div className="headBar" ref={headBarRef}>
                 <h1>
-                    Tic Tac Toe
+                    Game {gameState.id.slice(0, 3)}
                 </h1>
                 <div className="gameControls">
                     <div className="info">
@@ -189,7 +189,7 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
                 <p className="cell" onClick={() => handleMove(5, gameID)} style={{ color: gridColor }}>{gameState.board[5]}</p>
                 <p className="cell" onClick={() => handleMove(6, gameID)} style={{ color: gridColor }}>{gameState.board[6]}</p>
                 <p className="cell" onClick={() => handleMove(7, gameID)} style={{ color: gridColor }}>{gameState.board[7]}</p>
-                <p className="cell" onClick={() => handleMove(8, gameID)}>{gameState.board[8]}</p>
+                <p className="cell" onClick={() => handleMove(8, gameID)} style={{ color: gridColor }}>{gameState.board[8]}</p>
             </div>
             
         </>

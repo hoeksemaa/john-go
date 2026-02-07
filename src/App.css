@@ -88,6 +88,10 @@ button {
     margin-left: 30px
 }
 
+.info p {
+    justify-content: flex-start;
+}
+
 .headBar {
     background: rgb(24, 12, 26);
     padding: 10px;
