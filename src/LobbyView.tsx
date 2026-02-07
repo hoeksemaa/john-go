@@ -2,7 +2,10 @@ import { useState, useEffect } from "react"
 import { type GameID } from './types'
 import type { GameState } from "./go"
 
-const port = process.env.PORT || 3000
+//const port = parseInt(process.env.PORT as string) || 3000
+//const port = process.env.PORT || 3000
+const port = 3000
+//const port = 11000
 
 type LobbyViewProps = {
     onGameEnter: (id: GameID) => void
