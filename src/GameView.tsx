@@ -11,7 +11,7 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     const [gameState, setGameState] = useState(createGame())
 
     async function handleMove(index: number, id: GameID) {
-        const response = await fetch("http://localhost:3000/move/" + id, {
+        const response = await fetch(`http://localhost:3000/move/${id}`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({position: index})
@@ -21,7 +21,7 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     }
 
     async function getGameState(id: GameID) {
-        const response = await fetch("http://localhost:3000/game/" + id)
+        const response = await fetch(`http://localhost:3000/game/${id}`)
         const data: GameState = await response.json()
         setGameState(data)
     }
@@ -31,7 +31,11 @@ function GameView({ gameID, onLobbyEnter } : GameViewProps) {
     }
 
     useEffect(() => {
-        getGameState(gameID)
+        const interval = setInterval(() => {
+            getGameState(gameID)
+        }, 1000)
+
+        return () => {clearInterval(interval)}
     }, [])
 
     return (
