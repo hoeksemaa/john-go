@@ -5,7 +5,7 @@ import ViteExpress from "vite-express"
 import { createGame, makeMove, type GameState } from "./go.ts"
 import { type Games } from './types.ts'
 
-const port = process.env.PORT || 3000
+const port = parseInt(process.env.PORT as string) || 3000
 
 export let games: Games = new Map()
 export const app = express()
