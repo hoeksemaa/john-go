@@ -4,7 +4,7 @@ import type { GameState } from "./go"
 
 //const port = parseInt(process.env.PORT as string) || 3000
 //const port = process.env.PORT || 3000
-const port = 3000
+//const port = 3000
 //const port = 11000
 
 type LobbyViewProps = {
@@ -17,7 +17,7 @@ function LobbyView({ onGameEnter } : LobbyViewProps) {
     const [gamesList, setGamesList] = useState<GamesList>([])
 
     async function handleCreateGame() {
-        const response = await fetch(`http://localhost:${port}/create`, {
+        const response = await fetch(`/create`, {
             method: "POST"
         })
         const data = await response.json()
@@ -29,7 +29,7 @@ function LobbyView({ onGameEnter } : LobbyViewProps) {
     }
 
     async function loadGamesList() {
-        const response = await fetch(`http://localhost:${port}/list`)
+        const response = await fetch(`/list`)
         const data = await response.json()
         setGamesList(data)
     }
@@ -37,7 +37,7 @@ function LobbyView({ onGameEnter } : LobbyViewProps) {
     useEffect(() => {
         const interval = setInterval(() => {
             loadGamesList()
-        }, 1000)
+        }, 500)
         return () => {clearInterval(interval)}
     }, [])
 
