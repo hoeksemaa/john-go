@@ -8,7 +8,7 @@ import { type Games } from './types.ts'
 //const port = parseInt(process.env.PORT as string) || 3000
 //const port = 11000
 //const port = 3000
-const port = process.env.PORT || 3000
+const port = parseInt(process.env.PORT as string) || 3000
 
 export let games: Games = new Map()
 export const app = express()
